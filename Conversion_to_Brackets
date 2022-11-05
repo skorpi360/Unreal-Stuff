@@ -1,0 +1,47 @@
+//Written on C++
+
+#include <algorithm>
+#include <iostream>
+#include <cctype>
+#include <string>
+
+using namespace std;
+
+void convertString(string s);
+
+int main()
+{
+    string s = "";
+    cout << "Type your string: " << "\n";
+    getline(cin, s);
+    convertString(s);
+}
+
+void str_tolower(string* s)
+{
+    transform((*s).begin(), (*s).end(), (*s).begin(),
+        [](unsigned char c) { return std::tolower(c); }
+    );
+}
+
+void convertString(string s)
+{
+    str_tolower(&s);
+    string s_br = ""; //string for brackets
+    for (int i = 0; i < s.length(); i++) {
+        s_br.push_back('(');
+    }
+    for (int i = 0; i < s.length(); i++) {
+        if (s_br[i] == '(') { //if s_br[i] = ')' then we know s[i] repeats and we don't need to check it again
+            bool charRepeats = false;
+            for (int j = i + 1; j < s.length(); j++) {
+                if (s_br[j] == '(' && s[j] == s[i]) { //same if s_br[j] = ')'
+                    s_br[j] = ')';
+                    charRepeats = true;
+                }
+            }
+            if (charRepeats) { s_br[i] = ')'; }
+        }
+    }
+    cout << s_br << "\n";
+}
