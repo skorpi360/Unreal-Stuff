@@ -40,7 +40,9 @@ void convertString(string &s) {
                     charRepeats = true;
                 }
             }
-            if (charRepeats) { s_br[i] = ')'; }
+            if (charRepeats) {
+                s_br[i] = ')';
+            }
         }
     }
     s = s_br;
