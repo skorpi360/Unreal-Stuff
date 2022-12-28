@@ -7,16 +7,16 @@
 
 using namespace std;
 
-void convertToBrackets(string s);
+void convertString(string &s);
 
 int main() {
     string s = "";
     cout << "Type your string: " << "\n";
     getline(cin, s);
-    convertToBrackets(s);
+    convertString(s);
+    cout << s << "\n";
 }
 
-//Converts a string to a lowercase string
 void str_tolower(string &s) {
     transform(s.begin(), s.end(), s.begin(),
         [](unsigned char c) {
@@ -25,7 +25,7 @@ void str_tolower(string &s) {
     );
 }
 
-void convertToBrackets(string s) {
+void convertString(string &s) {
     str_tolower(s);
     string s_br = ""; //string for brackets
     for (int i = 0; i < s.length(); i++) {
@@ -40,10 +40,8 @@ void convertToBrackets(string s) {
                     charRepeats = true;
                 }
             }
-            if (charRepeats) {
-                s_br[i] = ')';
-            }
+            if (charRepeats) { s_br[i] = ')'; }
         }
     }
-    cout << s_br << "\n";
+    s = s_br;
 }
